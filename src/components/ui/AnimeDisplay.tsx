@@ -1,5 +1,5 @@
 import type { AnimeData, AnimePagination } from "@/types/Anime";
-import { Card } from "./card";
+import { Card, CardTitle } from "./card";
 
 interface AnimeDisplayProps {
   data: AnimeData[];
@@ -10,7 +10,7 @@ const RenderCard = ({ data }: { data: AnimeData[] }) => {
   return (
     <>
       {data.map((anime) => (
-        <Card key={anime.mal_id} className="max-w-70 h-70">
+        <Card key={anime.mal_id} className="overflow-hidden">
           <div className="w-full aspect-2/3">
             <img
               src={anime.images.webp.large_image_url}
@@ -19,6 +19,10 @@ const RenderCard = ({ data }: { data: AnimeData[] }) => {
               className="w-full h-full object-cover block"
             />
           </div>
+
+          <CardTitle className="text-center line-clamp-2 px-3">
+            <h2>{anime.title_english}</h2>
+          </CardTitle>
         </Card>
       ))}
     </>
