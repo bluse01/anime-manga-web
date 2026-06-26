@@ -17,7 +17,7 @@ function App() {
   }, []);
 
   return (
-    <>
+    <main>
       <Nav />
       {animeObject ? (
         <AnimeDisplay
@@ -27,7 +27,7 @@ function App() {
       ) : (
         <p>empty states</p>
       )}
-    </>
+    </main>
   );
 }
 

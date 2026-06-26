@@ -190,9 +190,13 @@
     @apply h-full;
   }
   #root {
-    @apply min-h-dvh flex flex-col;
+    @apply min-h-dvh flex flex-col items-center justify-center;
   }
   body {
     @apply bg-background text-foreground;
   }
+}
+
+main {
+  width: clamp(600px, 70%, 1200px);
 }
