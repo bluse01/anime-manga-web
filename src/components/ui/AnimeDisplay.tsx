@@ -1,5 +1,5 @@
 import type { AnimeData, AnimePagination } from "@/types/Anime";
-import { Card, CardTitle } from "./card";
+import { Card, CardTitle, CardContent, CardHeader } from "./card";
 
 interface AnimeDisplayProps {
   data: AnimeData[];
@@ -20,9 +20,18 @@ const RenderCard = ({ data }: { data: AnimeData[] }) => {
             />
           </div>
 
-          <CardTitle className="text-center line-clamp-2 px-3">
-            <h2>{anime.title_english}</h2>
-          </CardTitle>
+          <CardContent>
+            <p>
+              {anime.episodes ? anime.episodes : 0}
+              <span className="text-gray-400 text-xs pl-1">ep</span>
+            </p>
+          </CardContent>
+
+          <CardHeader>
+            <CardTitle className="text-center line-clamp-2 px-3">
+              <h2>{anime.title_english ? anime.title_english : anime.title}</h2>
+            </CardTitle>
+          </CardHeader>
         </Card>
       ))}
     </>
