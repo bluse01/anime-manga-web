@@ -10,13 +10,13 @@ const RenderCard = ({ data }: { data: AnimeData[] }) => {
   return (
     <>
       {data.map((anime) => (
-        <Card key={anime.mal_id} className="overflow-hidden">
+        <Card key={anime.mal_id}>
           <div className="w-full aspect-2/3">
             <img
               src={anime.images.webp.large_image_url}
               loading="lazy"
               alt="anime-img"
-              className="w-full h-full object-cover block"
+              className="w-full h-full object-cover block rounded-(--radius)"
             />
           </div>
 
