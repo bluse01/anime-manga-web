@@ -16,9 +16,7 @@ export interface AnimeData {
 }
 
 export interface AnimePagination {
-  pagination: {
-    current_page: number;
-  };
+  current_page: number;
 }
 
 export default interface AnimeObject {
