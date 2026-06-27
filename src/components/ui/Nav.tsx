@@ -24,7 +24,7 @@ export default function Nav() {
   }, []);
 
   return (
-    <nav className="my-2 flex flex-row justify-between">
+    <nav className="mt-2 mb-7 flex flex-row justify-between">
       <div className={divStyle}>
         <Button variant={"link"} size={"lg"}>
           <p className="text-lg font-medium">
