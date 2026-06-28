@@ -17,6 +17,12 @@ export interface AnimeData {
 
 export interface AnimePagination {
   current_page: number;
+  items: {
+    count: number;
+    per_page: number;
+    total: number;
+  };
+  last_visible_page: number;
 }
 
 export default interface AnimeObject {

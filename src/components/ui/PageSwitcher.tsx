@@ -7,30 +7,33 @@ import {
   PaginationNext,
   PaginationPrevious,
 } from "@/components/ui/pagination";
+import type { AnimePagination } from "@/types/Anime";
 
-export function PaginationDemo() {
+interface PaginationProps {
+  pag: AnimePagination;
+}
+
+export function PaginationComp({ pag }: PaginationProps) {
   return (
     <Pagination>
       <PaginationContent>
         <PaginationItem>
-          <PaginationPrevious href="#" />
+          <PaginationPrevious />
         </PaginationItem>
         <PaginationItem>
-          <PaginationLink href="#">1</PaginationLink>
+          <PaginationLink isActive>1</PaginationLink>
         </PaginationItem>
         <PaginationItem>
-          <PaginationLink href="#" isActive>
-            2
-          </PaginationLink>
+          <PaginationLink>2</PaginationLink>
         </PaginationItem>
         <PaginationItem>
-          <PaginationLink href="#">3</PaginationLink>
+          <PaginationLink>3</PaginationLink>
         </PaginationItem>
         <PaginationItem>
           <PaginationEllipsis />
         </PaginationItem>
         <PaginationItem>
-          <PaginationNext href="#" />
+          <PaginationNext />
         </PaginationItem>
       </PaginationContent>
     </Pagination>
