@@ -1,5 +1,6 @@
 import type { AnimeData, AnimePagination } from "@/types/Anime";
 import { Card, CardTitle, CardHeader, CardDescription } from "./card";
+import { PaginationDemo } from "./PageSwitcher";
 
 interface AnimeDisplayProps {
   data: AnimeData[];
@@ -46,8 +47,11 @@ export default function AnimeDisplay({ data, pagination }: AnimeDisplayProps) {
   console.log(pagination);
 
   return (
-    <div className="grid grid-cols-[repeat(auto-fill,minmax(160px,1fr))] gap-4 justify-center">
-      <RenderCard data={data} />
-    </div>
+    <>
+      <div className="grid grid-cols-[repeat(auto-fill,minmax(160px,1fr))] gap-4 justify-center">
+        <RenderCard data={data} />
+      </div>
+      <PaginationDemo />
+    </>
   );
 }
