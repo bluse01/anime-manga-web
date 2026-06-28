@@ -15,11 +15,13 @@ export function PaginationComp() {
   console.log(handlePageSwitch);
   console.log(pagination);
 
+  const page = pagination?.current_page || 1;
+
   return (
     <Pagination>
       <PaginationContent>
         <PaginationItem>
-          <PaginationPrevious />
+          <PaginationPrevious onClick={() => handlePageSwitch(page - 1)} />
         </PaginationItem>
         <PaginationItem>
           <PaginationLink isActive>1</PaginationLink>
@@ -34,7 +36,7 @@ export function PaginationComp() {
           <PaginationEllipsis />
         </PaginationItem>
         <PaginationItem>
-          <PaginationNext />
+          <PaginationNext onClick={() => handlePageSwitch(page + 1)} />
         </PaginationItem>
       </PaginationContent>
     </Pagination>
