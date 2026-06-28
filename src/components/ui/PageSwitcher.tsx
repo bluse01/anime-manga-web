@@ -7,16 +7,13 @@ import {
   PaginationNext,
   PaginationPrevious,
 } from "@/components/ui/pagination";
-import type { AnimePagination } from "@/types/Anime";
-import { pageContext } from "@/context/pageSwitchF";
+import { pageContext } from "@/context/pageContext";
 import { useContext } from "react";
 
-interface PaginationProps {
-  pag: AnimePagination;
-}
-
-export function PaginationComp({ pag }: PaginationProps) {
-  const handlePageSwitch = useContext(pageContext);
+export function PaginationComp() {
+  const { handlePageSwitch, pagination } = useContext(pageContext);
+  console.log(handlePageSwitch);
+  console.log(pagination);
 
   return (
     <Pagination>
