@@ -2,6 +2,7 @@ import { useEffect, useState } from "react";
 import Nav from "./components/ui/Nav";
 import AnimeDisplay from "./components/ui/AnimeDisplay";
 import type AnimeObject from "./types/Anime";
+import { pageContext } from "./context/pageSwitchF";
 
 function App() {
   const [animeObject, setAnimeObject] = useState<AnimeObject | null>(null);
@@ -30,15 +31,17 @@ function App() {
 
   return (
     <main>
-      <Nav />
-      {animeObject ? (
-        <AnimeDisplay
-          data={animeObject.data}
-          pagination={animeObject.pagination}
-        />
-      ) : (
-        <p>empty states</p>
-      )}
+      <pageContext.Provider value={handlePageSwitch}>
+        <Nav />
+        {animeObject ? (
+          <AnimeDisplay
+            data={animeObject.data}
+            pagination={animeObject.pagination}
+          />
+        ) : (
+          <p>empty states</p>
+        )}
+      </pageContext.Provider>
     </main>
   );
 }
