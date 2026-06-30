@@ -1,6 +1,6 @@
 import { useEffect, useState } from "react";
-import Nav from "./components/ui/Nav";
-import AnimeDisplay from "./components/ui/AnimeDisplay";
+import Nav from "./components/Nav";
+import AnimeDisplay from "./components/AnimeDisplay";
 import type AnimeObject from "./types/Anime";
 import { pageContext } from "./context/pageContext";
 

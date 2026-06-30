@@ -1,5 +1,5 @@
 import type { AnimeData } from "@/types/Anime";
-import { Card, CardTitle, CardHeader, CardDescription } from "./card";
+import { Card, CardTitle, CardHeader, CardDescription } from "./ui/card";
 import { PaginationComp } from "./PageSwitcher";
 
 interface AnimeDisplayProps {
