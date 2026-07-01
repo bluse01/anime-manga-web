@@ -9,6 +9,13 @@ import {
 } from "@/components/ui/pagination";
 import { pageContext } from "@/context/pageContext";
 import { useContext } from "react";
+import type { AnimePagination } from "@/types/Anime";
+
+const offsetPagLink = (pageRange = 3, pagination: AnimePagination | null) => {
+  // create a array of pageRange so we can index it later
+  const myArray = Array.from({ length: pageRange }, (_, index) => index + 1);
+  console.log(myArray);
+};
 
 export function PaginationComp() {
   const { handlePageSwitch, pagination } = useContext(pageContext);
@@ -16,6 +23,7 @@ export function PaginationComp() {
   console.log(pagination);
 
   const page = pagination?.current_page || 1;
+  offsetPagLink(3, pagination);
 
   return (
     <Pagination>
