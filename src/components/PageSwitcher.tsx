@@ -1,29 +1,35 @@
 import {
   Pagination,
   PaginationContent,
-  PaginationEllipsis,
   PaginationItem,
   PaginationLink,
   PaginationNext,
   PaginationPrevious,
 } from "@/components/ui/pagination";
 import { pageContext } from "@/context/pageContext";
-import { useContext } from "react";
-import type { AnimePagination } from "@/types/Anime";
-
-const offsetPagLink = (pageRange = 3, pagination: AnimePagination | null) => {
-  // create a array of pageRange so we can index it later
-  const myArray = Array.from({ length: pageRange }, (_, index) => index + 1);
-  console.log(myArray);
-};
+import { useContext, useState } from "react";
 
 export function PaginationComp() {
   const { handlePageSwitch, pagination } = useContext(pageContext);
-  console.log(handlePageSwitch);
+  const [pages, setPages] = useState([1, 2, 3]);
   console.log(pagination);
 
+  const offsetPagLink = (direction: string) => {
+    switch (direction) {
+      case "f":
+        if (pagination?.has_next_page) {
+          setPages([pages[1], pages[2], pages[2] + 1]);
+          handlePageSwitch(pages[2]);
+        }
+        return;
+      case "b":
+        return;
+      default:
+        return;
+    }
+  };
+
   const page = pagination?.current_page || 1;
-  offsetPagLink(3, pagination);
 
   return (
     <Pagination>
@@ -32,16 +38,25 @@ export function PaginationComp() {
           <PaginationPrevious onClick={() => handlePageSwitch(page - 1)} />
         </PaginationItem>
         <PaginationItem>
-          <PaginationLink isActive>1</PaginationLink>
+          <PaginationLink
+            isActive={pagination?.current_page === pages[0]}
+            onClick={() => offsetPagLink("b")}
+          >
+            {pages[0]}
+          </PaginationLink>
         </PaginationItem>
         <PaginationItem>
-          <PaginationLink>2</PaginationLink>
+          <PaginationLink isActive={pagination?.current_page === pages[1]}>
+            {pages[1]}
+          </PaginationLink>
         </PaginationItem>
         <PaginationItem>
-          <PaginationLink>3</PaginationLink>
-        </PaginationItem>
-        <PaginationItem>
-          <PaginationEllipsis />
+          <PaginationLink
+            isActive={pagination?.current_page === pages[2]}
+            onClick={() => offsetPagLink("f")}
+          >
+            {pages[2]}
+          </PaginationLink>
         </PaginationItem>
         <PaginationItem>
           <PaginationNext onClick={() => handlePageSwitch(page + 1)} />

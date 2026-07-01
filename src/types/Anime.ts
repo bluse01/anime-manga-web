@@ -23,6 +23,7 @@ export interface AnimePagination {
     total: number;
   };
   last_visible_page: number;
+  has_next_page: boolean;
 }
 
 export default interface AnimeObject {
