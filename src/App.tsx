@@ -3,22 +3,33 @@ import Nav from "./components/Nav";
 import AnimeDisplay from "./components/AnimeDisplay";
 import type AnimeObject from "./types/Anime";
 import { pageContext } from "./context/pageContext";
+import Search from "./components/Search";
 
 function App() {
   const [animeObject, setAnimeObject] = useState<AnimeObject | null>(null);
   const [page, setPage] = useState(1);
+  const [title, setTitle] = useState<string>("");
 
   const handlePageSwitch = (page: number) => setPage(page);
 
+  const handleSetTitle = (title: string) => {
+    setTitle(title);
+  };
+
   useEffect(() => {
     const fetchData = async () => {
-      const test_url = "https://api.jikan.moe/v4/top/anime";
+      const test_url = "https://api.jikan.moe/v4/anime";
 
       const params = new URLSearchParams();
       params.append("page", String(page));
+      params.append("q", title);
 
       try {
         const response = await fetch(`${test_url}?${params.toString()}`);
+        if (!response.ok) {
+          throw new Error(`HTTP error! status: ${response.status}`);
+        }
+
         const data = await response.json();
         setAnimeObject(data);
       } catch (err) {
@@ -27,7 +38,7 @@ function App() {
     };
 
     fetchData();
-  }, [page]);
+  }, [page, title]);
 
   return (
     <main>
@@ -38,6 +49,7 @@ function App() {
         }}
       >
         <Nav />
+        <Search onSetTitle={handleSetTitle} />
         {animeObject && animeObject.data ? (
           <AnimeDisplay data={animeObject.data} />
         ) : (
