@@ -38,7 +38,7 @@ function App() {
         }}
       >
         <Nav />
-        {animeObject ? (
+        {animeObject && animeObject.data ? (
           <AnimeDisplay data={animeObject.data} />
         ) : (
           <p>empty states</p>
