@@ -29,7 +29,7 @@ export function PaginationComp() {
   console.log(currentPage);
 
   return (
-    <Pagination>
+    <Pagination className="mb-5">
       <PaginationContent>
         <PaginationItem>
           <PaginationPrevious onClick={() => offsetPagLink(-1)} />

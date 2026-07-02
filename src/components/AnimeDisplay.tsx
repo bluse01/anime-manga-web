@@ -46,7 +46,7 @@ export default function AnimeDisplay({ data }: AnimeDisplayProps) {
 
   return (
     <>
-      <div className="grid grid-cols-[repeat(auto-fill,minmax(160px,1fr))] gap-4 justify-center">
+      <div className="grid grid-cols-[repeat(auto-fill,minmax(160px,1fr))] gap-4 justify-center mb-10">
         <RenderCard data={data} />
       </div>
       <PaginationComp />
