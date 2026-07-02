@@ -14,12 +14,16 @@ export function PaginationComp() {
   console.log(pagination);
 
   const currentPage = pagination?.current_page || 1;
+  const totalPages = pagination?.last_visible_page || 3;
+
+  const startPage = Math.max(1, Math.min(currentPage - 1, totalPages - 2));
 
   const offsetPagLink = (targetPage: number) => {
-    console.log("test", currentPage + targetPage);
-    const calcMax = Math.max(1, currentPage + targetPage);
-    const calcMin = Math.min(pagination?.items.total || 3, calcMax);
-    handlePageSwitch(calcMin);
+    // calc the page minimum so it doesn't go into negatives
+    const pageMin = Math.max(1, currentPage + targetPage);
+    // calc the page max so it doesn't overshoot
+    const pageMax = Math.min(pagination?.last_visible_page || 3, pageMin);
+    handlePageSwitch(pageMax);
   };
 
   console.log(currentPage);
@@ -31,18 +35,27 @@ export function PaginationComp() {
           <PaginationPrevious onClick={() => offsetPagLink(-1)} />
         </PaginationItem>
         <PaginationItem>
-          <PaginationLink isActive onClick={() => offsetPagLink(-1)}>
-            {currentPage}
+          <PaginationLink
+            isActive={currentPage === startPage}
+            onClick={() => offsetPagLink(-1)}
+          >
+            {startPage}
           </PaginationLink>
         </PaginationItem>
         <PaginationItem>
-          <PaginationLink onClick={() => offsetPagLink(1)}>
-            {currentPage + 1}
+          <PaginationLink
+            isActive={currentPage === startPage + 1}
+            onClick={() => offsetPagLink(1)}
+          >
+            {startPage + 1}
           </PaginationLink>
         </PaginationItem>
         <PaginationItem>
-          <PaginationLink onClick={() => offsetPagLink(2)}>
-            {currentPage + 2}
+          <PaginationLink
+            isActive={currentPage === startPage + 2}
+            onClick={() => offsetPagLink(2)}
+          >
+            {startPage + 2}
           </PaginationLink>
         </PaginationItem>
         <PaginationItem>
