@@ -4,6 +4,7 @@ import AnimeDisplay from "./components/AnimeDisplay";
 import type AnimeObject from "./types/Anime";
 import { pageContext } from "./context/pageContext";
 import Search from "./components/Search";
+import { EmptyState } from "./components/states/EmptyState";
 
 function App() {
   const [animeObject, setAnimeObject] = useState<AnimeObject | null>(null);
@@ -26,6 +27,7 @@ function App() {
 
       try {
         const response = await fetch(`${test_url}?${params.toString()}`);
+
         if (!response.ok) {
           throw new Error(`HTTP error! status: ${response.status}`);
         }
@@ -50,10 +52,10 @@ function App() {
       >
         <Nav />
         <Search onSetTitle={handleSetTitle} />
-        {animeObject && animeObject.data ? (
+        {animeObject && animeObject.data && animeObject.data.length ? (
           <AnimeDisplay data={animeObject.data} />
         ) : (
-          <p>empty states</p>
+          <EmptyState />
         )}
       </pageContext.Provider>
     </main>
