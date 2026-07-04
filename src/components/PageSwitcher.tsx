@@ -38,7 +38,6 @@ export function PaginationComp() {
 
         {Array.from({ length: maxPages }, (_, i) => {
           const currentOffset = i === 0 ? -1 : i;
-          // console.log("index: ", i, "offsetindex", currentOffset);
 
           return (
             <PaginationItem key={i}>

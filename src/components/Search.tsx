@@ -9,7 +9,6 @@ interface SearchProp {
 
 export default function Search({ onSetTitle }: SearchProp) {
   const [inputValue, setInputValue] = useState<string>("");
-  console.log(inputValue);
 
   return (
     <Field orientation="horizontal" className="mb-7 flex justify-center">
