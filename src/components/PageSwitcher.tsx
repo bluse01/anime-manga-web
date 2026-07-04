@@ -36,12 +36,14 @@ export function PaginationComp() {
         </PaginationItem>
 
         {Array.from({ length: pagination?.last_visible_page ?? 1 }, (_, i) => {
-          const offsetIndex = -1 + i;
+          let offsetIndex = +1;
+          // special case so the offset index can work on all pag buttons
+          if (i === 0) offsetIndex = -1;
 
           return (
             <PaginationItem key={i}>
               <PaginationLink
-                isActive={currentPage === startPage}
+                isActive={currentPage === startPage + i}
                 onClick={() => offsetPagLink(offsetIndex)}
               >
                 {startPage + i}
