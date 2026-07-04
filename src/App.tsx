@@ -5,11 +5,13 @@ import type AnimeObject from "./types/Anime";
 import { pageContext } from "./context/pageContext";
 import Search from "./components/Search";
 import { EmptyState } from "./components/states/EmptyState";
+import { LoadingSpinner } from "./components/states/LoadingState";
 
 function App() {
   const [animeObject, setAnimeObject] = useState<AnimeObject | null>(null);
   const [page, setPage] = useState(1);
   const [title, setTitle] = useState<string>("");
+  const [loading, setLoading] = useState(false);
 
   const handlePageSwitch = (page: number) => setPage(page);
 
@@ -19,6 +21,7 @@ function App() {
 
   useEffect(() => {
     const fetchData = async () => {
+      setLoading(true);
       const test_url = "https://api.jikan.moe/v4/anime";
 
       const params = new URLSearchParams();
@@ -36,6 +39,8 @@ function App() {
         setAnimeObject(data);
       } catch (err) {
         console.error("error while fetching: ", err);
+      } finally {
+        setLoading(false);
       }
     };
 
@@ -52,9 +57,15 @@ function App() {
       >
         <Nav />
         <Search onSetTitle={handleSetTitle} />
-        {animeObject && animeObject.data && animeObject.data.length ? (
+        {loading && <LoadingSpinner />}
+        {!loading &&
+        animeObject &&
+        animeObject.data &&
+        animeObject.data.length ? (
           <AnimeDisplay data={animeObject.data} />
-        ) : (
+        ) : null}
+
+        {!loading && animeObject && animeObject.data.length === 0 && (
           <EmptyState />
         )}
       </pageContext.Provider>
