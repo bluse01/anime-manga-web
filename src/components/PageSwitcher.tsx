@@ -15,6 +15,7 @@ export function PaginationComp() {
 
   const currentPage = pagination?.current_page || 1;
   const totalPages = pagination?.last_visible_page || 3;
+  const maxPages = Math.min(3, pagination?.last_visible_page ?? 1);
 
   const startPage = Math.max(1, Math.min(currentPage - 1, totalPages - 2));
 
@@ -35,7 +36,7 @@ export function PaginationComp() {
           <PaginationPrevious onClick={() => offsetPagLink(-1)} />
         </PaginationItem>
 
-        {Array.from({ length: pagination?.last_visible_page ?? 1 }, (_, i) => {
+        {Array.from({ length: maxPages }, (_, i) => {
           let offsetIndex = +1;
           // special case so the offset index can work on all pag buttons
           if (i === 0) offsetIndex = -1;
