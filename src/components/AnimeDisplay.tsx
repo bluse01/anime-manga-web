@@ -26,7 +26,9 @@ const RenderCard = ({ data }: { data: AnimeData[] }) => {
                 {anime.episodes ? anime.episodes : 0}
                 <span className="text-gray-400 text-xs pl-1">ep</span>
               </p>
-              <p className="text-primary">#{anime.rank}</p>
+              <p className="text-primary">
+                {anime.rank ? `#${anime.rank}` : `unrated`}
+              </p>
             </CardDescription>
 
             <CardTitle className="text-center line-clamp-2 px-3">
