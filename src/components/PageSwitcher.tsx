@@ -34,30 +34,22 @@ export function PaginationComp() {
         <PaginationItem>
           <PaginationPrevious onClick={() => offsetPagLink(-1)} />
         </PaginationItem>
-        <PaginationItem>
-          <PaginationLink
-            isActive={currentPage === startPage}
-            onClick={() => offsetPagLink(-1)}
-          >
-            {startPage}
-          </PaginationLink>
-        </PaginationItem>
-        <PaginationItem>
-          <PaginationLink
-            isActive={currentPage === startPage + 1}
-            onClick={() => offsetPagLink(1)}
-          >
-            {startPage + 1}
-          </PaginationLink>
-        </PaginationItem>
-        <PaginationItem>
-          <PaginationLink
-            isActive={currentPage === startPage + 2}
-            onClick={() => offsetPagLink(2)}
-          >
-            {startPage + 2}
-          </PaginationLink>
-        </PaginationItem>
+
+        {Array.from({ length: pagination?.last_visible_page ?? 1 }, (_, i) => {
+          const offsetIndex = -1 + i;
+
+          return (
+            <PaginationItem key={i}>
+              <PaginationLink
+                isActive={currentPage === startPage}
+                onClick={() => offsetPagLink(offsetIndex)}
+              >
+                {startPage + i}
+              </PaginationLink>
+            </PaginationItem>
+          );
+        })}
+
         <PaginationItem>
           <PaginationNext onClick={() => offsetPagLink(1)} />
         </PaginationItem>
