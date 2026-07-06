@@ -53,7 +53,7 @@ export default function Nav() {
           <HoverCardContent>
             This site is powered by Jikan API. If u see that API is down don't
             worry, Jikan itself is working, you might get outdated cached data
-            if you try to serch specific anime/manga details right now, simply
+            if you try to search specific anime/manga details right now, simply
             because Jikan cannot reach the source.
           </HoverCardContent>
         </HoverCard>
