@@ -37,13 +37,11 @@ export function PaginationComp() {
         </PaginationItem>
 
         {Array.from({ length: maxPages }, (_, i) => {
-          const currentOffset = i === 0 ? -1 : i;
-
           return (
             <PaginationItem key={i}>
               <PaginationLink
                 isActive={currentPage === startPage + i}
-                onClick={() => offsetPagLink(currentOffset)}
+                onClick={() => handlePageSwitch(startPage + i)}
               >
                 {startPage + i}
               </PaginationLink>
