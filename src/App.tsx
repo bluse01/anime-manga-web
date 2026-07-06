@@ -8,7 +8,9 @@ import { EmptyState } from "./components/states/EmptyState";
 import { LoadingSpinner } from "./components/states/LoadingState";
 
 function App() {
-  const [animeObject, setAnimeObject] = useState<AnimeObject | null>(null);
+  const [animeObjectCache, setAnimeObjectCache] = useState<{
+    [page: number]: AnimeObject;
+  }>({});
   const [page, setPage] = useState(1);
   const [title, setTitle] = useState<string>("");
   const [loading, setLoading] = useState(false);
@@ -19,7 +21,11 @@ function App() {
     setTitle(title);
   };
 
+  const cacheData = animeObjectCache[page];
+
   useEffect(() => {
+    if (animeObjectCache[page]) return;
+
     const fetchData = async () => {
       setLoading(true);
       const test_url = "https://api.jikan.moe/v4/anime";
@@ -36,7 +42,10 @@ function App() {
         }
 
         const data = await response.json();
-        setAnimeObject(data);
+        setAnimeObjectCache((prev) => ({
+          ...prev,
+          [page]: data,
+        }));
       } catch (err) {
         console.error("error while fetching: ", err);
       } finally {
@@ -45,29 +54,26 @@ function App() {
     };
 
     fetchData();
-  }, [page, title]);
+  }, [page, title, animeObjectCache]);
+  console.log("cache", animeObjectCache);
 
   return (
     <main>
       <pageContext.Provider
         value={{
           handlePageSwitch,
-          pagination: animeObject?.pagination ?? null,
+          pagination: cacheData?.pagination ?? null,
         }}
       >
         <Nav />
         <Search onSetTitle={handleSetTitle} />
         {loading && <LoadingSpinner />}
-        {!loading &&
-        animeObject &&
-        animeObject.data &&
-        animeObject.data.length ? (
-          <AnimeDisplay data={animeObject.data} />
+
+        {!loading && cacheData && cacheData.data && cacheData.data.length ? (
+          <AnimeDisplay data={cacheData.data} />
         ) : null}
 
-        {!loading && animeObject && animeObject.data.length === 0 && (
-          <EmptyState />
-        )}
+        {!loading && cacheData && cacheData.data.length === 0 && <EmptyState />}
       </pageContext.Provider>
     </main>
   );
