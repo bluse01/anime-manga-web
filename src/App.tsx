@@ -19,6 +19,8 @@ function App() {
 
   const handleSetTitle = (title: string) => {
     setTitle(title);
+    setPage(1);
+    setAnimeObjectCache({});
   };
 
   const cacheData = animeObjectCache[page];
