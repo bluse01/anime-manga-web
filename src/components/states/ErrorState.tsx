@@ -11,10 +11,10 @@ export function ErrorState() {
     <Empty>
       <EmptyHeader>
         <EmptyTitle>
-          <TriangleAlert />
+          <TriangleAlert color="red" />
         </EmptyTitle>
         <EmptyDescription>
-          Something went wrong please try again.
+          Something went wrong please try again later.
         </EmptyDescription>
       </EmptyHeader>
     </Empty>
