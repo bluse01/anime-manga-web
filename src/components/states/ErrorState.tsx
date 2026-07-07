@@ -6,7 +6,7 @@ import {
 } from "@/components/ui/empty";
 import { TriangleAlert } from "lucide-react";
 
-export function EmptyState() {
+export function ErrorState() {
   return (
     <Empty>
       <EmptyHeader>

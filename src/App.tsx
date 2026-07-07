@@ -6,6 +6,7 @@ import { pageContext } from "./context/pageContext";
 import Search from "./components/Search";
 import { EmptyState } from "./components/states/EmptyState";
 import { LoadingSpinner } from "./components/states/LoadingState";
+import { ErrorState } from "./components/states/ErrorState";
 
 function App() {
   const [animeObjectCache, setAnimeObjectCache] = useState<{
@@ -14,10 +15,12 @@ function App() {
   const [page, setPage] = useState(1);
   const [title, setTitle] = useState<string>("");
   const [loading, setLoading] = useState(false);
+  const [error, setError] = useState(false);
 
   const handlePageSwitch = (page: number) => setPage(page);
 
   const handleSetTitle = (title: string) => {
+    setError(false);
     setTitle(title);
     setPage(1);
     setAnimeObjectCache({});
@@ -49,6 +52,7 @@ function App() {
           [page]: data,
         }));
       } catch (err) {
+        setError(true);
         console.error("error while fetching: ", err);
       } finally {
         setLoading(false);
@@ -70,6 +74,8 @@ function App() {
         <Nav />
         <Search onSetTitle={handleSetTitle} />
         {loading && <LoadingSpinner />}
+
+        {error && <ErrorState />}
 
         {!loading && cacheData && cacheData.data && cacheData.data.length ? (
           <AnimeDisplay data={cacheData.data} />
