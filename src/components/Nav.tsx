@@ -14,10 +14,14 @@ export default function Nav() {
   // fetching jikan api status to display in the header
   useEffect(() => {
     const fetchApi = async () => {
-      const response = await fetch("https://api.jikan.moe/v4");
+      try {
+        const response = await fetch("https://api.jikan.moe/v4");
 
-      const data = await response.json();
-      setStatus(!data.myanimelist_heartbeat.down);
+        const data = await response.json();
+        setStatus(!data.myanimelist_heartbeat.down);
+      } catch {
+        console.log("nav status update error");
+      }
     };
 
     fetchApi();
