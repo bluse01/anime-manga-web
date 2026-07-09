@@ -24,7 +24,7 @@ export default function Search({ onSetTitle }: SearchProp) {
       }}
     >
       <Field orientation="horizontal" className="mb-7 flex justify-center">
-        <InputGroup className="w-1/2">
+        <InputGroup className="w-1/2 italic">
           <InputGroupInput
             placeholder="Try searching for a title..."
             onChange={(e) => setInputValue(e.target.value)}
