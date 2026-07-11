@@ -20,7 +20,7 @@ export default function Nav() {
         const data = await response.json();
         setStatus(!data.myanimelist_heartbeat.down);
       } catch {
-        console.log("nav status update error");
+        console.error("nav status update error");
       }
     };
 
