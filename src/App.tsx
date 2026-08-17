@@ -33,7 +33,7 @@ function App() {
 
     const fetchData = async () => {
       setLoading(true);
-      const test_url = "https://api.jikan.moe/v4/anime";
+      const url = "https://api.tenrai.org/v1/anime";
 
       const params = new URLSearchParams();
       params.append("page", String(page));
@@ -42,7 +42,7 @@ function App() {
       }
 
       try {
-        const response = await fetch(`${test_url}?${params.toString()}`);
+        const response = await fetch(`${url}?${params.toString()}`);
 
         if (!response.ok) {
           throw new Error(`HTTP error! status: ${response.status}`);
