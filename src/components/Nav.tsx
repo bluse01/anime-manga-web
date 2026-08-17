@@ -17,8 +17,12 @@ export default function Nav() {
       try {
         const response = await fetch("https://api.jikan.moe/v4");
 
-        const data = await response.json();
-        setStatus(!data.myanimelist_heartbeat.down);
+        if (!response.ok) {
+          const data = await response.json();
+          if (!data.myanimelist_heartbeat) {
+            setStatus(!data.myanimelist_heartbeat.down);
+          }
+        }
       } catch {
         console.error("nav status update error");
       }
@@ -39,19 +43,22 @@ export default function Nav() {
 
       <div className={divStyle}>
         <HoverCard>
-          <HoverCardTrigger>
-            {" "}
-            <a href="https://jikan.moe/" target="_blank">
-              <Button variant={"link"} size={"lg"}>
-                <p className="text-gray-400 text-xs">Jikan API</p>
+          <HoverCardTrigger asChild>
+            <Button variant="link" size="lg" asChild>
+              <a
+                href="https://jikan.moe/"
+                target="_blank"
+                rel="noopener noreferrer"
+              >
+                <span className="text-gray-400 text-xs">Jikan API</span>
                 <span
                   className={cn(
                     "w-1 h-1 rounded-full",
                     status ? "bg-green-400" : "bg-red-400",
                   )}
-                ></span>
-              </Button>
-            </a>
+                />
+              </a>
+            </Button>
           </HoverCardTrigger>
 
           <HoverCardContent>

@@ -37,7 +37,9 @@ function App() {
 
       const params = new URLSearchParams();
       params.append("page", String(page));
-      params.append("q", title);
+      if (title.trim()) {
+        params.append("q", title);
+      }
 
       try {
         const response = await fetch(`${test_url}?${params.toString()}`);
