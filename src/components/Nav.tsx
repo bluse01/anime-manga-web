@@ -11,17 +11,15 @@ export default function Nav() {
   const [status, setStatus] = useState(false);
   const divStyle = "border border-border shadow-sm rounded-(--radius)";
 
-  // fetching jikan api status to display in the header
+  // fetching tenrai anime endpoint to check the status of the api
   useEffect(() => {
     const fetchApi = async () => {
       try {
-        const response = await fetch("https://api.jikan.moe/v4");
+        const response = await fetch("https://api.tenrai.org/v1/anime");
+        console.log(response);
 
-        if (!response.ok) {
-          const data = await response.json();
-          if (!data.myanimelist_heartbeat) {
-            setStatus(!data.myanimelist_heartbeat.down);
-          }
+        if (response.ok) {
+          setStatus(true);
         }
       } catch {
         console.error("nav status update error");
@@ -46,11 +44,17 @@ export default function Nav() {
           <HoverCardTrigger asChild>
             <Button variant="link" size="lg" asChild>
               <a
-                href="https://jikan.moe/"
+                href="https://tenrai.org/"
                 target="_blank"
                 rel="noopener noreferrer"
+                className="align-middle"
               >
-                <span className="text-gray-400 text-xs">Jikan API</span>
+                <img
+                  src="/src/assets/logo-white.png"
+                  alt="Tenrai Logo"
+                  className="w-7 h-7"
+                />
+                <span className="text-gray-400 text-xs">Tenrai API</span>
                 <span
                   className={cn(
                     "w-1 h-1 rounded-full",
@@ -62,10 +66,10 @@ export default function Nav() {
           </HoverCardTrigger>
 
           <HoverCardContent>
-            This site is powered by Jikan API. If u see that API is down don't
-            worry, Jikan itself is working, you might get outdated cached data
+            This site is powered by Tenrai API. If u see that API is down don't
+            worry, Tenrai itself is working, you might get outdated cached data
             if you try to search specific anime/manga details right now, simply
-            because Jikan cannot reach the source.
+            because Tenrai cannot reach the source.
           </HoverCardContent>
         </HoverCard>
       </div>
