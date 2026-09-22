@@ -23,8 +23,16 @@ const RenderCard = ({ data }: { data: AnimeData[] }) => {
           <CardHeader>
             <CardDescription className="flex items-center justify-between pb-1">
               <p>
-                {anime.episodes ? anime.episodes : 0}
-                <span className="text-gray-400 text-xs pl-1">ep</span>
+                {anime.type === "Manga"
+                  ? anime.chapters
+                    ? anime.chapters
+                    : 0
+                  : anime.episodes
+                    ? anime.episodes
+                    : 0}
+                <span className="text-gray-400 text-xs pl-1">
+                  {anime.type === "Manga" ? "Ch" : "Ep"}
+                </span>
               </p>
               <p className="text-primary">
                 {anime.rank ? `#${anime.rank}` : `unrated`}

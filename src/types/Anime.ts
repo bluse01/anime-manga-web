@@ -1,5 +1,6 @@
 export interface AnimeData {
   title: string;
+  type: string;
   title_english: string | null;
   status: string;
   score: number;
@@ -7,6 +8,7 @@ export interface AnimeData {
   rank: number;
   mal_id: number;
   episodes: number | null;
+  chapters: number | null;
   images: {
     webp: {
       image_url: string;
