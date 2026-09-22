@@ -5,9 +5,16 @@ import {
   HoverCardContent,
   HoverCardTrigger,
 } from "@/components/ui/hover-card";
+import { ToggleGroup, ToggleGroupItem } from "@/components/ui/toggle-group";
 import { cn } from "@/lib/utils";
+import "../styles/content-switch.css";
 
-export default function Nav() {
+interface navProps {
+  value: string;
+  contentSwitch: (contentTarget: string) => void;
+}
+
+export default function Nav({ value, contentSwitch }: navProps) {
   const [status, setStatus] = useState(false);
   const divStyle = "border border-border shadow-sm rounded-(--radius)";
 
@@ -37,6 +44,31 @@ export default function Nav() {
             Anime <span className="text-white">List</span>
           </p>
         </Button>
+      </div>
+
+      <div className="flex justify-center items-center p-1">
+        <ToggleGroup
+          onValueChange={(v) => contentSwitch(v)}
+          type="single"
+          variant="outline"
+          value={value}
+          spacing={1}
+        >
+          <ToggleGroupItem
+            className="content-anime"
+            value="anime"
+            aria-label="Toggle Anime"
+          >
+            Anime
+          </ToggleGroupItem>
+          <ToggleGroupItem
+            className="content-manga"
+            value="manga"
+            aria-label="Toggle Manga"
+          >
+            Manga
+          </ToggleGroupItem>
+        </ToggleGroup>
       </div>
 
       <div className={divStyle}>

@@ -16,8 +16,17 @@ function App() {
   const [title, setTitle] = useState<string>("");
   const [loading, setLoading] = useState(false);
   const [error, setError] = useState(false);
+  const [content, setContent] = useState<string>("anime");
 
   const handlePageSwitch = (page: number) => setPage(page);
+
+  const handleContentSwitch = (contentTarget: string) => {
+    setError(false);
+    setContent(contentTarget);
+    setPage(1);
+    setAnimeObjectCache({});
+  };
+  console.log(content);
 
   const handleSetTitle = (title: string) => {
     setError(false);
@@ -33,7 +42,7 @@ function App() {
 
     const fetchData = async () => {
       setLoading(true);
-      const url = "https://api.tenrai.org/v1/anime";
+      const url = `https://api.tenrai.org/v1/${content}`;
 
       const params = new URLSearchParams();
       params.append("page", String(page));
@@ -62,7 +71,7 @@ function App() {
     };
 
     fetchData();
-  }, [page, title, animeObjectCache]);
+  }, [page, title, animeObjectCache, content]);
   console.log("cache", animeObjectCache);
 
   return (
@@ -73,7 +82,7 @@ function App() {
           pagination: cacheData?.pagination ?? null,
         }}
       >
-        <Nav />
+        <Nav value={content} contentSwitch={handleContentSwitch} />
         <Search onSetTitle={handleSetTitle} />
         {loading && <LoadingSpinner />}
 

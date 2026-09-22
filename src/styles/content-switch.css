@@ -1,0 +1,7 @@
+@import "../styles/index.css";
+
+.content-manga[data-state="on"],
+.content-anime[data-state="on"] {
+  color: var(--color-primary);
+  position: relative;
+}
