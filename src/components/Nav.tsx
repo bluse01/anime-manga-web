@@ -48,7 +48,9 @@ export default function Nav({ value, contentSwitch }: navProps) {
 
       <div className="flex justify-center items-center p-1">
         <ToggleGroup
-          onValueChange={(v) => contentSwitch(v)}
+          onValueChange={(v) => {
+            if (v) contentSwitch(v);
+          }}
           type="single"
           variant="outline"
           value={value}
